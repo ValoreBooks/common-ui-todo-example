@@ -3,18 +3,30 @@ import React from "react";
 import { Button, Input, Container, Row, Col } from "@follett/common-ui";
 
 class TodoInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todo: ""
+    };
+  }
+
   handleKeyPress = e => {
     const key = e.key;
     const value = e.target.value;
+    this.setState({
+      todo: value
+    });
+
     if (key === "Enter") {
-      e.target.value = "";
       this.props.onTodoItemAdded(value);
+      this.setState({
+        todo: ""
+      });
     }
   };
 
   handleAddButtonClick = () => {
-    this.props.onTodoItemAdded(this.textInput.value);
-    this.textInput.value = "";
+    this.props.onTodoItemAdded(this.state.todo);
   };
 
   render() {
@@ -22,7 +34,6 @@ class TodoInput extends React.Component {
       <div class="d-flex flex-row bd-highlight mb-3">
         <Input
           type="text"
-          ref={input => (this.textInput = input)}
           onKeyPress={this.handleKeyPress}
         />
         <Button
