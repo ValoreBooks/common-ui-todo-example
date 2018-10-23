@@ -55,7 +55,7 @@ export default class TodoApp extends React.Component {
       },
       {
         id: new Date().getTime(),
-        title: "Sent letter to John",
+        title: "Send letter to John",
         complete: false
       }
     ]
